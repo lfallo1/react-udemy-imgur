@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
-var babelify = require('babelify');
+var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var connect = require('gulp-connect'); //Runs a local dev server
 var open = require('gulp-open'); //Open a URL in a web browser
@@ -33,7 +33,7 @@ var notify = function(error) {
   var title = 'Error: ';
 
   if (error.message) {
-    title += error.message.split(':')[1].split('(')[0];
+    title += error.message;
   } else {
     title += ' description not available';
   }
@@ -75,7 +75,7 @@ gulp.task('jsx', function(){
     var bundler = browserify({
       entries : [config.paths.mainJsx],
       extensions: ['.jsx', 'js'],
-      paths: ['./node_modules', './src', './src/components', './src/components/common'],
+      paths: ['./node_modules', './src', './src/components', './src/components/common', './src/components/api'],
       transform : [reactify]
     });
 

@@ -13,32 +13,19 @@ var appHistory = RouterHistory(CreateHashHistory)(
     { queryKey: false }
 );
 
-var imgurSecret = 'bb5737bebca1794c83224a1b889e97f801dfe3f9';
-var imgurClientId = 'b14aab91734a013';
-
-//get all topics
-// https://api.imgur.com/3/topics/defaults
-
-//get list of galleries by topic
-// https://api.imgur.com/3/topics/{topic_id}/{sort}/{page}
-
-//get specific gallery information
-// https://api.imgur.com/3/topics/{topic_id}/{item_id}
-
-//comments by image
-//https://api.imgur.com/3/gallery/image/zn7O7QW/comments/top
-//https://api.imgur.com/3/gallery/album/{id}/comments/{sort}
-
 
 var Base = require('Base');
-var Page1 = require('Page1');
+var ImgurTopicList = require('ImgurTopicList');
 var Page2 = require('Page2');
+var PageTwoSub = require('PageTwoSub');
 
 var Routes = (
     <Router history={appHistory}>
         <Route path="/" component={Base}>
-            <IndexRoute component={Page1} />
-            <Route path="page2" component={Page2} />
+            <IndexRoute component={ImgurTopicList} />
+            <Route path="page2" component={Page2}>
+              <Route path="sub" component={PageTwoSub} />
+            </Route>
         </Route>
     </Router>
 );

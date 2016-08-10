@@ -8,10 +8,6 @@ var Base = React.createClass({
             <div>
                 <Header />
                 {this.props.children}
-                <br /><hr />
-                <div className="footer">
-                    <h3>Footer</h3>
-                </div>
             </div>
         );
     }
