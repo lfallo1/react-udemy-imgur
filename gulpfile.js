@@ -75,7 +75,7 @@ gulp.task('jsx', function(){
     var bundler = browserify({
       entries : [config.paths.mainJsx],
       extensions: ['.jsx', 'js'],
-      paths: ['./node_modules', './src', './src/components', './src/components/common', './src/components/api'],
+      paths: ['./node_modules', './src', './src/components', './src/components/common', './src/components/flux/api', './src/components/flux/actions', './src/components/flux/stores', './src/components/ImgurTopics'],
       transform : [reactify]
     });
 

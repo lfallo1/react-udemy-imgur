@@ -15,14 +15,14 @@ var appHistory = RouterHistory(CreateHashHistory)(
 
 
 var Base = require('Base');
-var ImgurTopicList = require('ImgurTopicList');
+var ImgurTopicsPage = require('ImgurTopicsPage');
 var Page2 = require('Page2');
 var PageTwoSub = require('PageTwoSub');
 
 var Routes = (
     <Router history={appHistory}>
         <Route path="/" component={Base}>
-            <IndexRoute component={ImgurTopicList} />
+            <IndexRoute component={ImgurTopicsPage} />
             <Route path="page2" component={Page2}>
               <Route path="sub" component={PageTwoSub} />
             </Route>

@@ -6,10 +6,10 @@ var ImgurTopic = React.createClass({
       var {imgurTopic} = this.props;
 
       return (
-        <div className="thumbnail">
-          {imgurTopic.name}
+        <li className="list-group-item">
+          {imgurTopic.name} - {imgurTopic.description}
           <img src={imgurTopic.heroImage ? imgurTopic.heroImage.link : ''} alt="noimage.png" width="100px" />
-        </div>
+        </li>
       );
   }
 });
