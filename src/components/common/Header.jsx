@@ -7,7 +7,7 @@ var Header = React.createClass({
         return (
             <ul className="nav nav-tabs">
                 <li role="presentation"><Link to="/">Page 1</Link></li>
-                <li role="presentation"><Link to="/page2">Page 2</Link></li>
+                <li role="presentation"><Link to="/secure/page2">Page 2</Link></li>
             </ul>
         );
     }
