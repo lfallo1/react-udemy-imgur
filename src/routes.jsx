@@ -3,7 +3,7 @@ var ReactRouter = require('react-router');
 var IndexRoute = require('react-router').IndexRoute;
 var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
-var BrowserHistory = ReactRouter.browserHistory;
+var History = ReactRouter.hashHistory;
 
 var Base = require('Base');
 var Login = require('Login');
@@ -13,7 +13,7 @@ var PageTwoSub = require('PageTwoSub');
 var AuthHelper = require('AuthHelper');
 
 var Routes = (
-    <Router history={BrowserHistory}>
+    <Router history={History}>
         <Route path="/" component={Base}>
             <IndexRoute component={ImgurTopicsPage} />
             <Route path="login" component={Login} onEnter={AuthHelper.isAnonymous} />

@@ -1,14 +1,14 @@
 var React = require('react');
 var AuthStore = require('AuthStore');
 var ReactRouter = require('react-router');
-var BrowserHistory = ReactRouter.browserHistory;
+var History = ReactRouter.hashHistory;
 
 var Login = React.createClass({
 
     login : function(){
       AuthStore.login();
       var redirectUrl = this.props.location.query ? this.props.location.query.next : '/secure/page2';
-      BrowserHistory.push(redirectUrl);
+      History.push(redirectUrl);
     },
 
     render: function(){
