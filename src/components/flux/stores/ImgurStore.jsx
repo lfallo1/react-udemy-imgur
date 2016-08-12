@@ -14,7 +14,7 @@ var ImgurStore = Reflux.createStore({
   getTopics : function(){
     this.isLoading = true;
     this.clearTopics();
-    
+
     api.get('topics/defaults').then((response) => {
       this.topics = response.data;
       this.isLoading = false;
