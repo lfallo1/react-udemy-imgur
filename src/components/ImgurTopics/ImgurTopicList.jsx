@@ -8,7 +8,7 @@ var ImgurTopicList = React.createClass({
     getInitialState : function(){
       return {
         isLoading : false,
-        data : []
+        topics : []
       }
     },
 
@@ -30,7 +30,7 @@ var ImgurTopicList = React.createClass({
     },
 
     render: function(){
-        var imgurTopicList = this.state.data.map((topic) => {
+        var imgurTopicList = this.state.topics.map((topic) => {
           return (
               <ImgurTopic key={topic.id} imgurTopic={topic} />
             );
