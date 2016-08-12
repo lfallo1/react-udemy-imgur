@@ -1,14 +1,10 @@
 var React = require('react');
-var ReactRouter = require('react-router');
-var ImgurActions = require('ImgurActions');
-var History = ReactRouter.hashHistory;
+var History = require('react-router').hashHistory;
 
 var ImgurTopic = React.createClass({
 
   viewGalleries : function(){
-    // History.push('/galleries?topicId=' + this.props.imgurTopic.id);
-    ImgurActions.selectTopic(this.props.imgurTopic.id);
-    History.push('/galleries');
+    History.push('/galleries?topicId=' + this.props.imgurTopic.id);
   },
 
   render : function(){
