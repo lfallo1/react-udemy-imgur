@@ -1,1 +1,1 @@
-module.exports = require('reflux').createActions(['getTopics', 'getGalleriesByTopic', 'clearGalleries']);
+module.exports = require('reflux').createActions(['getTopics', 'getGalleriesByTopic', 'clearGalleries', 'clearSelectedTopic']);

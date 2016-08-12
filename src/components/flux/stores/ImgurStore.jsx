@@ -14,16 +14,21 @@ var ImgurStore = Reflux.createStore({
     this.fireUpdate();
   },
 
+  clearSelectedTopic : function(){
+    this.imgur.selectedTopic = undefined;
+    this.fireUpdate();
+  },
+
   //public - expoed in imgur actions
   getTopics : function(){
-    this.imgur.isLoading = true;
-    this.clearTopics();
-
-    api.get('topics/defaults').then((response) => {
-      this.imgur.topics = response.data;
-      this.imgur.isLoading = false;
-      this.fireUpdate();
-    });
+    if(!this.imgur.topics || this.imgur.topics.length === 0){
+      this.imgur.isLoading = true;
+      api.get('topics/defaults').then((response) => {
+        this.imgur.topics = response.data;
+        this.imgur.isLoading = false;
+        this.fireUpdate();
+      });
+    }
   },
 
   getGalleriesByTopic : function(topicId, previousPage){
@@ -35,6 +40,7 @@ var ImgurStore = Reflux.createStore({
     api.get('topics/' + topicId + '/viral/' + this.imgur.galleryPage).then((response) => {
       this.imgur.isGalleryLoading = false;
       this.imgur.galleries = response.data;
+      this.imgur.selectedTopic = this.imgur.topics && this.imgur.topics.length > 0 ? this.imgur.topics.filter((t)=>{return t.id == topicId})[0].name : '';
       this.fireUpdate();
     });
   },
@@ -47,6 +53,7 @@ var ImgurStore = Reflux.createStore({
 
   fireUpdate : function(){
     this.trigger('change', {
+      'selectedTopic' : this.imgur.selectedTopic,
       'topics' : this.imgur.topics || [],
       'galleries' : this.imgur.galleries || [],
       'galleryPage' : this.imgur.galleryPage,
