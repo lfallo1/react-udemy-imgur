@@ -1,6 +1,7 @@
 var React = require('react');
 var ImgurStore = require('ImgurStore');
 var ImgurActions = require('ImgurActions');
+var History = require('react-router').hashHistory;
 
 var ImgurGalleriesByTopicPage = React.createClass({
 
@@ -9,6 +10,9 @@ var ImgurGalleriesByTopicPage = React.createClass({
     },
 
     componentWillMount : function(){
+      if(!this.props.routeParams.topicId){
+        History.push('/');
+      }
       this.unsubscribe = ImgurStore.listen(this.handleChange);
       ImgurActions.clearGalleries();
       this.getGalleriesByTopic();
@@ -19,11 +23,11 @@ var ImgurGalleriesByTopicPage = React.createClass({
     },
 
     getGalleriesByTopic : function(){
-      ImgurActions.getGalleriesByTopic(this.props.location.query.topicId);
+      ImgurActions.getGalleriesByTopic(this.props.routeParams.topicId);
     },
 
     getGalleriesByTopicPrevious : function(){
-      ImgurActions.getGalleriesByTopic(this.props.location.query.topicId, true);
+      ImgurActions.getGalleriesByTopic(this.props.routeParams.topicId, true);
     },
 
     handleChange : function(event, newState){
@@ -53,12 +57,16 @@ var ImgurGalleriesByTopicPage = React.createClass({
       var renderList = () => {
         return this.state.galleries.map((gallery)=>{
           return (
-              <li className="list-group-item" key={gallery.id}>
-                  <div>
-                    {gallery.title}
-                    <a target="_blank" href={"http://imgur.com/topic/" + gallery.topic.replace(' ','_') + '/' + gallery.id}><img src={getThumbnailLink(gallery)} height="175px" /></a>
+              <div className="col-md-3" key={gallery.id}>
+                <div className="thumbnail">
+                    <a target="_blank" href={"http://imgur.com/topic/" + gallery.topic.replace(' ','_') + '/' + gallery.id}>
+                      <img src={getThumbnailLink(gallery)} height="175px" />
+                      <div className="caption text-center">
+                        <h4>{gallery.title}</h4>
+                      </div>
+                    </a>
                   </div>
-              </li>
+              </div>
           )
         });
       };
@@ -69,9 +77,9 @@ var ImgurGalleriesByTopicPage = React.createClass({
           <span className="badge">{"Page " + Number(this.state.galleryPage + 1)}</span>
           <button className="btn btn-primary" disabled={this.state.galleryPage < 1} onClick={this.getGalleriesByTopicPrevious}>Previous page</button>
           <button className="btn btn-primary" onClick={this.getGalleriesByTopic}>Next page</button>
-          <ul className="list-group">
+          <div className="row">
             {renderList()}
-          </ul>
+          </div>
         </div>
       );
     }
